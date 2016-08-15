@@ -226,7 +226,60 @@ namespace WindowsFormsApplication1
                 }
                 alphabet = subal.ToArray();
         }
-                
+        private string[] original;
+        private int nogroup;
+        private void Group()
+        {
+            int number = 0;
+            var temporiginal = new List<string>();
+            string subascii = messageascii;
+            int asciilength = 0;
+            if (messageascii.Length % 10 == 0)
+            {
+                var dividend = new List<Int32>();
+                int j = 1;
+                while (j <= messageascii.Length)
+                {
+                    if (messageascii.Length % j == 0)
+                    {
+                        dividend.Add(j);
+                    }
+                    j = j + 1;
+                }
+                nogroup = dividend[(dividend.Count / 2) - 1];
+                number = messageascii.Length / nogroup;
+            }
+            if (messageascii.Length % 10 != 0)
+            {
+                var dividend = new List<Int32>();
+                asciilength = Convert.ToInt32(((messageascii.Length).ToString()).Substring(0, ((messageascii.Length).ToString()).Length - 1));
+                asciilength = asciilength * 10;
+                int j = 1;
+                while (j <= asciilength)
+                {
+                    if (asciilength % j == 0)
+                    {
+                        dividend.Add(j);
+                    }
+                    j = j + 1;
+                }
+                nogroup = dividend[(dividend.Count / 2) - 1];
+                number = asciilength / nogroup;
+            }
+            int a = 1;
+            while (a <= nogroup)
+            {
+                temporiginal.Add(subascii.Substring(0, number));
+                subascii = subascii.Remove(0, number);
+                a++;
+            }
+            if (subascii.Length != 0)
+            {
+                nogroup = nogroup + 1;
+                temporiginal.Add(subascii);
+            }
+            original = temporiginal.ToArray();
+        }        
         private void Encrypt()
         {
             var check = new List<Int32>();
@@ -251,12 +304,17 @@ namespace WindowsFormsApplication1
             publicKey = "0";
             int i = 0;
             MessageBox.Show(messageascii);
-            if (publicKey.Length != messageascii.Length) //tạo ra chỗ điền key vào
+            publicKey = "";
+            Group();
+            var modified = new List<string>();
+            int j = 0;
+            while (j <= nogroup)
             {
-                publicKey = string.Concat(Enumerable.Repeat("0", messageascii.Length));
+                modified.Add("0");
+                j++;
             }
-            while ((((messageascii.Length%2) == 0) && i <= (messageascii.Length/2)) ||
-                   (((messageascii.Length%2) == 1) && i <= (messageascii.Length/2) - 1))
+            while ((((nogroup % 2) == 0) && i <= (nogroup / 2)) ||
+                   (((nogroup % 2) == 1) && i <= (nogroup / 2) - 1))
             {
                 ctlpublic = 0;
                 while (subhash.Length < ctlhash) //Trường hợp mà hết hash phải thêm hash vào
@@ -271,41 +329,33 @@ namespace WindowsFormsApplication1
                     {
                         ctlpublic = ctlpublic + 1;
                         s = s + 1;
-                        if (ctlpublic > messageascii.Length)
+                        if (ctlpublic > nogroup)
                         {
                             ctlpublic = 0;
                         }
                     }
                     bool exist1 = check.Exists(element => element == i);
                     bool exist2 = check.Exists(element => element == ctlpublic);
-                    if (ctlpublic < messageascii.Length && exist1 == false && exist2 == false && i != ctlpublic)
-                    {
-                        //MessageBox.Show(i + "và " + ctlpublic);
-                        char replace1 = (messageascii[i]);
-                        char replace2 = (messageascii[ctlpublic]);
-                        StringBuilder change = new StringBuilder(publicKey);
-                        change[ctlpublic] = replace1;
-                        change[i] = replace2;
-                        publicKey = change.ToString();
+                    if (ctlpublic < nogroup && exist1 == false && exist2 == false && i != ctlpublic)
+                    {                        
+                        modified[i] = original[ctlpublic];
+                        modified[ctlpublic] = original[i];
                         check.Add(i);
                         check.Add(ctlpublic);
                         i = i + 1;
                     }
-                    if (check.Count == (messageascii.Length - 1))
+                    if (check.Count == (nogroup - 1))
                     {
                         int thr = 0;
                         while ((check.Exists(element => element == thr)) == true)
                         {
                             thr = thr + 1;
                         }
-                        char replace3 = (messageascii[thr]);
-                        StringBuilder change1 = new StringBuilder(publicKey);
-                        change1[thr] = replace3;
-                        publicKey = change1.ToString();
+                        modified[thr] = original[thr];
                         i = i + 1;
                         check.Add(thr);
                     }
-                    if (check.Count == (messageascii.Length - 2))
+                    if (check.Count == (nogroup - 2))
                     {
                         int rem1 = 0;
                         int rem2 = 0;
@@ -321,13 +371,9 @@ namespace WindowsFormsApplication1
                             {
                                 rem2 = rem2 + 1;
                             }
-                            check.Add(rem1);
-                            char replace6 = messageascii[rem1];
-                            char replace5 = messageascii[rem2];
-                            StringBuilder change2 = new StringBuilder(publicKey);
-                            change2[rem1] = replace5;
-                            change2[rem2] = replace6;
-                            publicKey = change2.ToString();
+                            check.Add(rem2);
+                            modified[rem1] = original[rem2];
+                            modified[rem2] = original[rem1];
                             i = i + 1;
                         }
                     }
