@@ -161,7 +161,7 @@ namespace WindowsFormsApplication1
 
         private void textBox9_TextChanged(object sender, EventArgs e)
         {
-            privateKey = textBox9.Text;
+            
         }
 
         private void textBox12_TextChanged(object sender, EventArgs e)
@@ -190,16 +190,20 @@ namespace WindowsFormsApplication1
             BigInteger dk = 1;
             while (subpriv.Length != 0)
             {
-                ctlhash = ctlhash + Convert.ToInt16(subpriv.Substring(0, 1));
+                ctlhash = ctlhash + Convert.ToInt32(subpriv.Substring(0, 1));
                 subpriv = subpriv.Remove(0, 1);
                 if (subpriv.Length == 0 && ctlhash > (hash.ToString()).Length || messageascii.Length / 2 < ctlhash)
                 {
                     dk = dk + 1;
-                    subpriv = (BigInteger.Divide(BigInteger.Parse
-                        (privateKey), dk)).ToString();
+                    subpriv = (Math.Sqrt(Convert.ToInt32(ctlhash))).ToString();
                     ctlhash = 0;
                 }
-            }           
+                if(subpriv.Contains("."))
+                {
+                    subpriv = subpriv.Remove(subpriv.IndexOf("."), subpriv.Length - subpriv.IndexOf("."));
+                }
+            }
+            ctlhash = Convert.ToInt32(Math.Sqrt(ctlhash));           
         }
         private void Ascii()
         {
@@ -212,12 +216,27 @@ namespace WindowsFormsApplication1
             }
         }
 
+        private void textBox9_TextChanged_1(object sender, EventArgs e)
+        {
+            privateKey = textBox9.Text;
+        }
+
+        private void textBox11_TextChanged_1(object sender, EventArgs e)
+        {
+            message = textBox11.Text;
+        }
+
+        private void textBox12_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
         private string allist;
         private char[] alphabet;
         private void Alphabet()
         {
             allist =
-            "0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_-+=,./;'[]><|{}?:`~ \n\"\\\t\v";
+            "0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_-+=,./;'[]><|{}?:`~\n\"\\\t\v";
             var subal = new List<char>();
             while (allist.Length != 0)
             {
@@ -308,7 +327,7 @@ namespace WindowsFormsApplication1
             Group();
             var modified = new List<string>();
             int j = 0;
-            while (j <= nogroup)
+            while (j < nogroup)
             {
                 modified.Add("0");
                 j++;
@@ -387,23 +406,34 @@ namespace WindowsFormsApplication1
                     subhash = subhash + hash;
                 }
                 subhash = subhash.Remove(0, ctlhash);
+            }
+            int l = 0;
+            while (l < nogroup)
+            {
+                publicKey = publicKey + modified[l];
+                l++;
             }          
             string TpublicKey = publicKey;
             if ((publicKey.Length%2) == 1)
             {
                 while (publicKey.Length != 1)
                 {                  
-                    if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 98)
+                    if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 97)
                     {
                         outputkey = outputkey + "range0";
                         publicKey = publicKey.Remove(0, 2);
                     }
-                    if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 99)
+                    if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 98)
                     {
                         outputkey = outputkey + "range1";
                         publicKey = publicKey.Remove(0, 2);
                     }
-                    if (publicKey.Length >= 1 && Convert.ToInt32(publicKey.Substring(0, 2)) <= 97)
+                    if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 99)
+                    {
+                        outputkey = outputkey + "range2";
+                        publicKey = publicKey.Remove(0, 2);
+                    }
+                    if (publicKey.Length >= 1 && Convert.ToInt32(publicKey.Substring(0, 2)) <= 96)
                     {
                         outputkey = outputkey + alphabet[Convert.ToInt32(publicKey.Substring(0, 2))];
                         publicKey = publicKey.Remove(0, 2);
@@ -419,18 +449,23 @@ namespace WindowsFormsApplication1
             {
                 while (publicKey.Length != 0)
                 {
-                    
-                    if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 98)
+
+                    if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 97)
                     {
                         outputkey = outputkey + "range0";
                         publicKey = publicKey.Remove(0, 2);
                     }
-                    if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 99)
+                    if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 98)
                     {
                         outputkey = outputkey + "range1";
                         publicKey = publicKey.Remove(0, 2);
                     }
-                    if (publicKey.Length >= 1 && Convert.ToInt32(publicKey.Substring(0, 2)) <= 97)
+                    if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 99)
+                    {
+                        outputkey = outputkey + "range2";
+                        publicKey = publicKey.Remove(0, 2);
+                    }
+                    if (publicKey.Length >= 1 && Convert.ToInt32(publicKey.Substring(0, 2)) <= 96)
                     {
                         outputkey = outputkey + alphabet[Convert.ToInt32(publicKey.Substring(0, 2))];
                         publicKey = publicKey.Remove(0, 2);

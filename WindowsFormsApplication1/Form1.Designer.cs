@@ -52,13 +52,16 @@
             this.label8 = new System.Windows.Forms.Label();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabControl4 = new System.Windows.Forms.TabControl();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.button4 = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
@@ -83,6 +86,8 @@
             this.tabPage2.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabControl4.SuspendLayout();
+            this.tabPage8.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabControl3.SuspendLayout();
@@ -328,13 +333,7 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.button3);
-            this.tabPage3.Controls.Add(this.textBox9);
-            this.tabPage3.Controls.Add(this.textBox11);
-            this.tabPage3.Controls.Add(this.label11);
-            this.tabPage3.Controls.Add(this.textBox12);
-            this.tabPage3.Controls.Add(this.label12);
+            this.tabPage3.Controls.Add(this.tabControl4);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -343,18 +342,92 @@
             this.tabPage3.Text = "Encrypt";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // tabControl4
+            // 
+            this.tabControl4.Controls.Add(this.tabPage8);
+            this.tabControl4.Controls.Add(this.tabPage9);
+            this.tabControl4.Location = new System.Drawing.Point(6, 6);
+            this.tabControl4.Name = "tabControl4";
+            this.tabControl4.SelectedIndex = 0;
+            this.tabControl4.Size = new System.Drawing.Size(626, 539);
+            this.tabControl4.TabIndex = 9;
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.Controls.Add(this.label9);
+            this.tabPage8.Controls.Add(this.textBox9);
+            this.tabPage8.Controls.Add(this.textBox11);
+            this.tabPage8.Controls.Add(this.label11);
+            this.tabPage8.Controls.Add(this.textBox12);
+            this.tabPage8.Controls.Add(this.label12);
+            this.tabPage8.Controls.Add(this.button3);
+            this.tabPage8.Location = new System.Drawing.Point(4, 22);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(618, 513);
+            this.tabPage8.TabIndex = 0;
+            this.tabPage8.Text = "TEXT";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 12);
+            this.label9.Location = new System.Drawing.Point(3, 4);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(87, 13);
-            this.label9.TabIndex = 1;
+            this.label9.TabIndex = 10;
             this.label9.Text = "Secret Password";
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(6, 20);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(603, 20);
+            this.textBox9.TabIndex = 9;
+            this.textBox9.UseSystemPasswordChar = true;
+            this.textBox9.TextChanged += new System.EventHandler(this.textBox9_TextChanged_1);
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(6, 60);
+            this.textBox11.Multiline = true;
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(603, 167);
+            this.textBox11.TabIndex = 12;
+            this.textBox11.TextChanged += new System.EventHandler(this.textBox11_TextChanged_1);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 44);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(50, 13);
+            this.label11.TabIndex = 11;
+            this.label11.Text = "Message";
+            // 
+            // textBox12
+            // 
+            this.textBox12.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.textBox12.Location = new System.Drawing.Point(6, 258);
+            this.textBox12.Multiline = true;
+            this.textBox12.Name = "textBox12";
+            this.textBox12.ReadOnly = true;
+            this.textBox12.Size = new System.Drawing.Size(603, 190);
+            this.textBox12.TabIndex = 14;
+            this.textBox12.TextChanged += new System.EventHandler(this.textBox12_TextChanged_1);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 242);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(57, 13);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "Public Key";
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(522, 487);
+            this.button3.Location = new System.Drawing.Point(499, 459);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(110, 42);
             this.button3.TabIndex = 8;
@@ -362,52 +435,15 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // textBox9
+            // tabPage9
             // 
-            this.textBox9.Location = new System.Drawing.Point(9, 28);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(623, 20);
-            this.textBox9.TabIndex = 0;
-            this.textBox9.UseSystemPasswordChar = true;
-            this.textBox9.TextChanged += new System.EventHandler(this.textBox9_TextChanged);
-            // 
-            // textBox11
-            // 
-            this.textBox11.Location = new System.Drawing.Point(9, 68);
-            this.textBox11.Multiline = true;
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(623, 167);
-            this.textBox11.TabIndex = 3;
-            this.textBox11.TextChanged += new System.EventHandler(this.textBox11_TextChanged);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 52);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(50, 13);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "Message";
-            // 
-            // textBox12
-            // 
-            this.textBox12.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.textBox12.Location = new System.Drawing.Point(9, 266);
-            this.textBox12.Multiline = true;
-            this.textBox12.Name = "textBox12";
-            this.textBox12.ReadOnly = true;
-            this.textBox12.Size = new System.Drawing.Size(623, 190);
-            this.textBox12.TabIndex = 5;
-            this.textBox12.TextChanged += new System.EventHandler(this.textBox12_TextChanged);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 250);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(57, 13);
-            this.label12.TabIndex = 4;
-            this.label12.Text = "Public Key";
+            this.tabPage9.Location = new System.Drawing.Point(4, 22);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(618, 513);
+            this.tabPage9.TabIndex = 1;
+            this.tabPage9.Text = "tabPage9";
+            this.tabPage9.UseVisualStyleBackColor = true;
             // 
             // tabPage4
             // 
@@ -609,7 +645,6 @@
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "LN Security";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -618,7 +653,9 @@
             this.tabPage2.PerformLayout();
             this.tabControl2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            this.tabControl4.ResumeLayout(false);
+            this.tabPage8.ResumeLayout(false);
+            this.tabPage8.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
@@ -656,13 +693,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label13;
@@ -682,6 +713,15 @@
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.TextBox textBox18;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TabControl tabControl4;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TabPage tabPage9;
     }
 }
 
