@@ -62,6 +62,15 @@
             this.label12 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.textBox20 = new System.Windows.Forms.TextBox();
+            this.button8 = new System.Windows.Forms.Button();
+            this.label20 = new System.Windows.Forms.Label();
+            this.textBox19 = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.textBox17 = new System.Windows.Forms.TextBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.button4 = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
@@ -88,6 +97,7 @@
             this.tabPage3.SuspendLayout();
             this.tabControl4.SuspendLayout();
             this.tabPage8.SuspendLayout();
+            this.tabPage9.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabControl3.SuspendLayout();
@@ -437,13 +447,103 @@
             // 
             // tabPage9
             // 
+            this.tabPage9.Controls.Add(this.textBox20);
+            this.tabPage9.Controls.Add(this.button8);
+            this.tabPage9.Controls.Add(this.label20);
+            this.tabPage9.Controls.Add(this.textBox19);
+            this.tabPage9.Controls.Add(this.label19);
+            this.tabPage9.Controls.Add(this.label17);
+            this.tabPage9.Controls.Add(this.textBox17);
+            this.tabPage9.Controls.Add(this.button7);
+            this.tabPage9.Controls.Add(this.button6);
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage9.Size = new System.Drawing.Size(618, 513);
             this.tabPage9.TabIndex = 1;
-            this.tabPage9.Text = "tabPage9";
+            this.tabPage9.Text = "FILE";
             this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // textBox20
+            // 
+            this.textBox20.Location = new System.Drawing.Point(6, 157);
+            this.textBox20.Name = "textBox20";
+            this.textBox20.Size = new System.Drawing.Size(515, 20);
+            this.textBox20.TabIndex = 8;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(527, 479);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 20);
+            this.button8.TabIndex = 7;
+            this.button8.Text = "Encrypt";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(271, 141);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(58, 13);
+            this.label20.TabIndex = 6;
+            this.label20.Text = "Output File";
+            // 
+            // textBox19
+            // 
+            this.textBox19.Location = new System.Drawing.Point(6, 103);
+            this.textBox19.Name = "textBox19";
+            this.textBox19.Size = new System.Drawing.Size(515, 20);
+            this.textBox19.TabIndex = 5;
+            this.textBox19.TextChanged += new System.EventHandler(this.textBox19_TextChanged);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(271, 87);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(57, 13);
+            this.label19.TabIndex = 4;
+            this.label19.Text = "Target File";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(271, 21);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(53, 13);
+            this.label17.TabIndex = 3;
+            this.label17.Text = "Password";
+            this.label17.Click += new System.EventHandler(this.label17_Click);
+            // 
+            // textBox17
+            // 
+            this.textBox17.Location = new System.Drawing.Point(6, 38);
+            this.textBox17.Name = "textBox17";
+            this.textBox17.Size = new System.Drawing.Size(606, 20);
+            this.textBox17.TabIndex = 2;
+            this.textBox17.TextChanged += new System.EventHandler(this.textBox17_TextChanged);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(527, 157);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 20);
+            this.button7.TabIndex = 1;
+            this.button7.Text = "Browse...";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(527, 100);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 0;
+            this.button6.Text = "Browse...";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // tabPage4
             // 
@@ -656,6 +756,8 @@
             this.tabControl4.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
             this.tabPage8.PerformLayout();
+            this.tabPage9.ResumeLayout(false);
+            this.tabPage9.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
@@ -722,6 +824,15 @@
         private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.TextBox textBox20;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox textBox19;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox textBox17;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button6;
     }
 }
 

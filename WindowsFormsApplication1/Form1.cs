@@ -5,6 +5,8 @@ using System.Numerics;
 using System.Security.AccessControl;
 using System.Linq;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 
 namespace WindowsFormsApplication1
 {
@@ -231,6 +233,52 @@ namespace WindowsFormsApplication1
 
         }
 
+        private void label17_Click(object sender, EventArgs e)
+        {
+
+        }
+        private OpenFileDialog inputfile = new OpenFileDialog();
+        private bool chexist1, chexist2;
+        private void button6_Click(object sender, EventArgs e)
+        {            
+            DialogResult result1 = inputfile.ShowDialog();
+            string file = "";
+            if (result1 == DialogResult.OK) // Test result.
+            {
+                file = inputfile.FileName;
+                textBox19.Text = file;
+            }
+        }
+        private string inputpath;
+        private void textBox19_TextChanged(object sender, EventArgs e)
+        {
+            inputpath = textBox19.Text;           
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (inputfile.CheckFileExists == false || inputfile.CheckPathExists == false)
+            {
+                return;
+            }
+            byte[] bytefile = System.IO.File.ReadAllBytes(inputpath);
+            int a = 0;
+            string hex = BitConverter.ToString(bytefile);
+            hex = hex.Replace("-", "");
+            messageascii = hex;
+            Encrypt();           
+        }
+
+        private void textBox17_TextChanged(object sender, EventArgs e)
+        {
+            privateKey = textBox17.Text;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private string allist;
         private char[] alphabet;
         private void Alphabet()
@@ -298,9 +346,11 @@ namespace WindowsFormsApplication1
                 temporiginal.Add(subascii);
             }
             original = temporiginal.ToArray();
-        }        
+        }
+        byte[] outputbyte;        
         private void Encrypt()
         {
+            
             var check = new List<Int32>();
             var bytelist = new List<Byte>();
             int privlenght = privateKey.Length;
@@ -315,10 +365,12 @@ namespace WindowsFormsApplication1
                 hash = BigInteger.Pow(BigInteger.Parse(privateKey.Substring(0, (privateKey.Length - 1)/2)),
                     Convert.ToInt32(privateKey.Substring((privateKey.Length - 1)/2, (privateKey.Length - 1)/2 + 1)));
             }
-            Ascii();
+            if (inputpath == null)
+            {
+                Ascii();
+            }
             ControlHash(); //Tính hash điều khiển để chọn độ dài hash con
             //Encrypt chính
-            string submess = message; //string phụ chạy điều kiện lặp while
             string subhash = hash.ToString(); //string phụ chạy lặp while
             publicKey = "0";
             int i = 0;
@@ -412,68 +464,80 @@ namespace WindowsFormsApplication1
             {
                 publicKey = publicKey + modified[l];
                 l++;
-            }          
-            string TpublicKey = publicKey;
-            if ((publicKey.Length%2) == 1)
-            {
-                while (publicKey.Length != 1)
-                {                  
-                    if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 97)
-                    {
-                        outputkey = outputkey + "range0";
-                        publicKey = publicKey.Remove(0, 2);
-                    }
-                    if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 98)
-                    {
-                        outputkey = outputkey + "range1";
-                        publicKey = publicKey.Remove(0, 2);
-                    }
-                    if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 99)
-                    {
-                        outputkey = outputkey + "range2";
-                        publicKey = publicKey.Remove(0, 2);
-                    }
-                    if (publicKey.Length >= 1 && Convert.ToInt32(publicKey.Substring(0, 2)) <= 96)
-                    {
-                        outputkey = outputkey + alphabet[Convert.ToInt32(publicKey.Substring(0, 2))];
-                        publicKey = publicKey.Remove(0, 2);
-                    }
-                }
-                if (publicKey.Length == 1)
-                {
-                    outputkey = outputkey + "single" + publicKey.Substring(0, 1);
-                    publicKey = publicKey.Remove(0, 1);
-                }
             }
-            if (((publicKey.Length%2) == 0))
+            if (inputpath == null)
             {
-                while (publicKey.Length != 0)
+                string TpublicKey = publicKey;
+                if ((publicKey.Length % 2) == 1)
                 {
-
-                    if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 97)
+                    while (publicKey.Length != 1)
                     {
-                        outputkey = outputkey + "range0";
-                        publicKey = publicKey.Remove(0, 2);
+                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 97)
+                        {
+                            outputkey = outputkey + "range0";
+                            publicKey = publicKey.Remove(0, 2);
+                        }
+                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 98)
+                        {
+                            outputkey = outputkey + "range1";
+                            publicKey = publicKey.Remove(0, 2);
+                        }
+                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 99)
+                        {
+                            outputkey = outputkey + "range2";
+                            publicKey = publicKey.Remove(0, 2);
+                        }
+                        if (publicKey.Length >= 1 && Convert.ToInt32(publicKey.Substring(0, 2)) <= 96)
+                        {
+                            outputkey = outputkey + alphabet[Convert.ToInt32(publicKey.Substring(0, 2))];
+                            publicKey = publicKey.Remove(0, 2);
+                        }
                     }
-                    if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 98)
+                    if (publicKey.Length == 1)
                     {
-                        outputkey = outputkey + "range1";
-                        publicKey = publicKey.Remove(0, 2);
-                    }
-                    if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 99)
-                    {
-                        outputkey = outputkey + "range2";
-                        publicKey = publicKey.Remove(0, 2);
-                    }
-                    if (publicKey.Length >= 1 && Convert.ToInt32(publicKey.Substring(0, 2)) <= 96)
-                    {
-                        outputkey = outputkey + alphabet[Convert.ToInt32(publicKey.Substring(0, 2))];
-                        publicKey = publicKey.Remove(0, 2);
+                        outputkey = outputkey + "single" + publicKey.Substring(0, 1);
+                        publicKey = publicKey.Remove(0, 1);
                     }
                 }
-            }
-            MessageBox.Show(TpublicKey);
+                if (((publicKey.Length % 2) == 0))
+                {
+                    while (publicKey.Length != 0)
+                    {
 
+                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 97)
+                        {
+                            outputkey = outputkey + "range0";
+                            publicKey = publicKey.Remove(0, 2);
+                        }
+                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 98)
+                        {
+                            outputkey = outputkey + "range1";
+                            publicKey = publicKey.Remove(0, 2);
+                        }
+                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 99)
+                        {
+                            outputkey = outputkey + "range2";
+                            publicKey = publicKey.Remove(0, 2);
+                        }
+                        if (publicKey.Length >= 1 && Convert.ToInt32(publicKey.Substring(0, 2)) <= 96)
+                        {
+                            outputkey = outputkey + alphabet[Convert.ToInt32(publicKey.Substring(0, 2))];
+                            publicKey = publicKey.Remove(0, 2);
+                        }
+                    }
+                }
+                MessageBox.Show(TpublicKey);
+            }
+            if (inputpath != null)
+            {
+                outputbyte = new byte[publicKey.Length / 2];
+                for (int index = 0; index < outputbyte.Length; index++)
+                {
+                    string byteValue = publicKey.Substring(index * 2, 2);
+                    outputbyte[index] = byte.Parse(byteValue, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                }
+                File.WriteAllBytes("C:\\Users\\zodiac3011\\Desktop\\test.exe", outputbyte);
+            }
         }
         private void DEControlHash()
         {
