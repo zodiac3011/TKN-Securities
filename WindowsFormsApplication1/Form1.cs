@@ -381,8 +381,104 @@ namespace WindowsFormsApplication1
                     }
                     j = j + 1;
                 }
-                nogroup = dividend[dividend.Count / 2];
-                amtofgrp = asciilength / nogroup;           
+            int limit = 0;
+            int sub = 0;
+            bool flag =true;
+            while (dividend[limit] < 100 || flag == false)
+                {
+                    limit++;
+                }
+            limit = limit - 1;
+            if (dividend[limit] < 30)
+            {
+                while (dividend[limit] < 500)
+                {
+                    limit++;
+                }
+                if (dividend[limit] > 500 && dividend[limit-1] > 30)
+                {
+                    limit = limit - 1;
+                }
+                if (dividend[limit] < 30)
+                {
+                    while (dividend[limit] < 1000)
+                    {
+                        limit++;
+                    }
+                }
+                if (dividend[limit] > 1000 && dividend[limit - 1] > 30)
+                {
+                    limit = limit - 1;
+                }
+                if (dividend[limit] < 30)
+                {
+                    while (dividend[limit] < 5000)
+                    {
+                        limit++;
+                    }
+                }
+                if (dividend[limit] > 5000 && dividend[limit - 1] > 30)
+                {
+                    limit = limit - 1;
+                }
+            }
+            if (dividend.Count <= 6)
+            {
+                dividend.Clear();
+                asciilength = Convert.ToInt32(((bytefile.Length).ToString()).Substring(0, 1) + "0");
+                j = 1;
+                while (j <= asciilength)
+                {
+                    if (asciilength % j == 0)
+                    {
+                        dividend.Add(j);
+                    }
+                    j = j + 1;
+                }
+                limit = 0;
+                sub = 0;
+                while (dividend[limit] < 100)
+                {
+                    limit++;
+                    if (limit = dividend)
+                }
+                limit = limit - 1;
+                if (dividend[limit] < 30)
+                {
+                    while (dividend[limit] < 500)
+                    {
+                        limit++;
+                    }
+                    if (dividend[limit] > 500 && dividend[limit - 1] > 30)
+                    {
+                        limit = limit - 1;
+                    }
+                    if (dividend[limit] < 30)
+                    {
+                        while (dividend[limit] < 1000)
+                        {
+                            limit++;
+                        }
+                    }
+                    if (dividend[limit] > 1000 && dividend[limit - 1] > 30)
+                    {
+                        limit = limit - 1;
+                    }
+                    if (dividend[limit] < 30)
+                    {
+                        while (dividend[limit] < 5000)
+                        {
+                            limit++;
+                        }
+                    }
+                    if (dividend[limit] > 5000 && dividend[limit - 1] > 30)
+                    {
+                        limit = limit - 1;
+                    }
+                }
+            }
+            nogroup = dividend[limit];
+            amtofgrp = asciilength / nogroup;           
         }
         byte[] outputbyte;
         private void Encrypt()
@@ -447,7 +543,7 @@ namespace WindowsFormsApplication1
                         modified.Add("0");
                         j++;
                     }
-                    while (subhash.Length < ctlhash) //Trường hợp mà hết hash phải thêm hash vào
+                    while (subhash.Length <= ctlhash) //Trường hợp mà hết hash phải thêm hash vào
                     {
                         subhash = subhash + hash;
                     }
@@ -511,7 +607,7 @@ namespace WindowsFormsApplication1
                         {
                             i = i + 1;
                         }
-                        while (subhash.Length < ctlhash) //Trường hợp mà hết hash phải thêm hash vào
+                        while (subhash.Length <= ctlhash) //Trường hợp mà hết hash phải thêm hash vào
                         {
                             subhash = subhash + hash;
                         }
@@ -525,9 +621,23 @@ namespace WindowsFormsApplication1
                         }
                     }
                 }
+
+                while (subhash.Length <= ctlhash) //Trường hợp mà hết hash phải thêm hash vào
+                {
+                    subhash = subhash + hash;
+                }
                 if (inputpath != null)
                 {
-                    while (subhash.Length < ctlhash) //Trường hợp mà hết hash phải thêm hash vào
+                    if (bytefile.Length % nogroup != 0)
+                    {
+                        int isolate = Convert.ToInt32(((bytefile.Length).ToString()).Substring(bytefile.Length - 1, 1));
+                        while (isolate >= 0)
+                        {
+                            tempspace[bytefile.Length - isolate] = bytefile[bytefile.Length - isolate];
+                            isolate = isolate - 1;
+                        }
+                    }
+                    while (subhash.Length <= ctlhash) //Trường hợp mà hết hash phải thêm hash vào
                     {
                         subhash = subhash + hash;
                     }
@@ -628,7 +738,7 @@ namespace WindowsFormsApplication1
                         {
                             i = i + 1;
                         }
-                        while (subhash.Length < ctlhash) //Trường hợp mà hết hash phải thêm hash vào
+                        while (subhash.Length <= ctlhash) //Trường hợp mà hết hash phải thêm hash vào
                         {
                             subhash = subhash + hash;
                         }
