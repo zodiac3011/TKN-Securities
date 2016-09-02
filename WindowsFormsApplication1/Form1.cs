@@ -781,7 +781,7 @@ namespace WindowsFormsApplication1
             if (inputpath != null)
             {
                 outputbyte = tempspace.ToArray();
-                File.WriteAllBytes("C:\\Users\\zodiac3011\\Desktop\\test.exe", outputbyte);
+                File.WriteAllBytes((Environment.GetFolderPath(Environment.SpecialFolder.Desktop)).ToString() +"\\test.exe" , outputbyte);
             }
         }
 
