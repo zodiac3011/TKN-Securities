@@ -1,12 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Numerics;
 using System.Text;
 using System.Windows.Forms;
-using System.Numerics;
-using System.Security.AccessControl;
-using System.Linq;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 
 namespace WindowsFormsApplication1
 {
@@ -42,7 +39,6 @@ namespace WindowsFormsApplication1
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -51,42 +47,34 @@ namespace WindowsFormsApplication1
 
         private void label7_Click(object sender, EventArgs e)
         {
-
         }
 
         private void label5_Click(object sender, EventArgs e)
         {
-
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void textBox7_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void label6_Click(object sender, EventArgs e)
         {
-
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void textBox8_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void label8_Click(object sender, EventArgs e)
         {
-
         }
 
         private void textBox13_TextChanged(object sender, EventArgs e)
@@ -100,7 +88,6 @@ namespace WindowsFormsApplication1
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void tabPage2_Click(object sender, EventArgs e)
@@ -109,7 +96,6 @@ namespace WindowsFormsApplication1
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -162,7 +148,6 @@ namespace WindowsFormsApplication1
 
         private void textBox9_TextChanged(object sender, EventArgs e)
         {
-            
         }
 
         private void textBox12_TextChanged(object sender, EventArgs e)
@@ -171,15 +156,13 @@ namespace WindowsFormsApplication1
 
         private void label10_Click(object sender, EventArgs e)
         {
-
         }
 
-        BigInteger hash;
+        private BigInteger hash;
         private int ctlhash, ctlpublic;
 
         private void textBox14_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private string orgpublic, messageascii;
@@ -199,13 +182,14 @@ namespace WindowsFormsApplication1
                     subpriv = (Math.Sqrt(Convert.ToInt32(ctlhash))).ToString();
                     ctlhash = 0;
                 }
-                if(subpriv.Contains("."))
+                if (subpriv.Contains("."))
                 {
                     subpriv = subpriv.Remove(subpriv.IndexOf("."), subpriv.Length - subpriv.IndexOf("."));
                 }
             }
-            ctlhash = Convert.ToInt32(Math.Sqrt(ctlhash));           
+            ctlhash = Convert.ToInt32(Math.Sqrt(ctlhash));
         }
+
         private void ByteControlHash()
         {
             string subpriv = privateKey;
@@ -227,6 +211,7 @@ namespace WindowsFormsApplication1
             }
             ctlhash = Convert.ToInt32(Math.Sqrt(ctlhash));
         }
+
         private void Ascii()
         {
             int e = 0; //biến đếm điều kiện array
@@ -250,17 +235,17 @@ namespace WindowsFormsApplication1
 
         private void textBox12_TextChanged_1(object sender, EventArgs e)
         {
-
         }
 
         private void label17_Click(object sender, EventArgs e)
         {
-
         }
+
         private OpenFileDialog inputfile = new OpenFileDialog();
         private bool chexist1, chexist2;
+
         private void button6_Click(object sender, EventArgs e)
-        {            
+        {
             DialogResult result1 = inputfile.ShowDialog();
             string file = "";
             if (result1 == DialogResult.OK) // Test result.
@@ -269,12 +254,16 @@ namespace WindowsFormsApplication1
                 textBox19.Text = file;
             }
         }
+
         private string inputpath;
+
         private void textBox19_TextChanged(object sender, EventArgs e)
         {
-            inputpath = textBox19.Text;           
+            inputpath = textBox19.Text;
         }
+
         private byte[] bytefile;
+
         private void button8_Click(object sender, EventArgs e)
         {
             if (inputfile.CheckFileExists == false || inputfile.CheckPathExists == false)
@@ -282,7 +271,7 @@ namespace WindowsFormsApplication1
                 return;
             }
             bytefile = System.IO.File.ReadAllBytes(inputpath);
-            Encrypt();           
+            Encrypt();
         }
 
         private void textBox17_TextChanged(object sender, EventArgs e)
@@ -292,11 +281,11 @@ namespace WindowsFormsApplication1
 
         private void button7_Click(object sender, EventArgs e)
         {
-
         }
 
         private string allist;
         private char[] alphabet;
+
         private void Alphabet()
         {
             allist =
@@ -304,13 +293,15 @@ namespace WindowsFormsApplication1
             var subal = new List<char>();
             while (allist.Length != 0)
             {
-                    subal.Add(Convert.ToChar(allist.Substring(0, 1)));
-                    allist = allist.Remove(0, 1);
-                }
-                alphabet = subal.ToArray();
+                subal.Add(Convert.ToChar(allist.Substring(0, 1)));
+                allist = allist.Remove(0, 1);
+            }
+            alphabet = subal.ToArray();
         }
-        private string[] original; 
+
+        private string[] original;
         private int nogroup;
+
         private void Group()
         {
             int number = 0;
@@ -362,67 +353,29 @@ namespace WindowsFormsApplication1
                 temporiginal.Add(subascii);
             }
             original = temporiginal.ToArray();
-
         }
+
         private int amtofgrp;
+
         private void Transition()
         {
             int a = 0;
             int asciilength = 0;
             asciilength = bytefile.Length;
-            
-                var dividend = new List<Int32>();
-                int j = 1;
-                while (j <= asciilength)
+
+            var dividend = new List<Int32>();
+            int j = 1;
+            while (j <= asciilength)
+            {
+                if (asciilength % j == 0)
                 {
-                    if (asciilength % j == 0)
-                    {
-                        dividend.Add(j);
-                    }
-                    j = j + 1;
+                    dividend.Add(j);
                 }
+                j = j + 1;
+            }
             int limit = 0;
             int sub = 0;
-            bool flag =true;
-            while (dividend[limit] < 100 || flag == false)
-                {
-                    limit++;
-                }
-            limit = limit - 1;
-            if (dividend[limit] < 30)
-            {
-                while (dividend[limit] < 500)
-                {
-                    limit++;
-                }
-                if (dividend[limit] > 500 && dividend[limit-1] > 30)
-                {
-                    limit = limit - 1;
-                }
-                if (dividend[limit] < 30)
-                {
-                    while (dividend[limit] < 1000)
-                    {
-                        limit++;
-                    }
-                }
-                if (dividend[limit] > 1000 && dividend[limit - 1] > 30)
-                {
-                    limit = limit - 1;
-                }
-                if (dividend[limit] < 30)
-                {
-                    while (dividend[limit] < 5000)
-                    {
-                        limit++;
-                    }
-                }
-                if (dividend[limit] > 5000 && dividend[limit - 1] > 30)
-                {
-                    limit = limit - 1;
-                }
-            }
-            if (dividend.Count <= 6)
+            if (dividend.Count <= 2)
             {
                 dividend.Clear();
                 asciilength = Convert.ToInt32(((bytefile.Length).ToString()).Substring(0, 1) + "0");
@@ -437,53 +390,70 @@ namespace WindowsFormsApplication1
                 }
                 limit = 0;
                 sub = 0;
-                while (dividend[limit] < 100)
-                {
-                    limit++;
-                    if (limit = dividend)
+                while (sub < dividend.Count)
+                {                    
+                    if (dividend[sub] <= 500)
+                    {
+                        limit = sub;
+                    }
+                    sub++;
                 }
-                limit = limit - 1;
-                if (dividend[limit] < 30)
+            }
+            while (sub < dividend.Count)
+            {
+                sub++;
+                if (dividend[sub] <= 500)
                 {
-                    while (dividend[limit] < 500)
+                    limit = sub;
+                }
+                if (dividend[dividend.Count - 1] < 30 || dividend[2] > 500 || dividend[2] > 1000)
+                {
+                    if (dividend[2] > 500)
                     {
-                        limit++;
-                    }
-                    if (dividend[limit] > 500 && dividend[limit - 1] > 30)
-                    {
-                        limit = limit - 1;
-                    }
-                    if (dividend[limit] < 30)
-                    {
-                        while (dividend[limit] < 1000)
+                        sub = 0;
+                        while (sub < dividend.Count)
                         {
-                            limit++;
+                            if (dividend[sub] <= 1000)
+                            {
+                                limit = sub;
+                            }
+                            sub++;
                         }
                     }
-                    if (dividend[limit] > 1000 && dividend[limit - 1] > 30)
+                    if (dividend[dividend.Count - 1] < 30 || dividend[2] > 1000)
                     {
-                        limit = limit - 1;
-                    }
-                    if (dividend[limit] < 30)
-                    {
-                        while (dividend[limit] < 5000)
+                        dividend.Clear();
+                        asciilength = Convert.ToInt32(((bytefile.Length).ToString()).Substring(0, 1) + "0");
+                        j = 1;
+                        while (j <= asciilength)
                         {
-                            limit++;
+                            if (asciilength % j == 0)
+                            {
+                                dividend.Add(j);
+                            }
+                            j = j + 1;
                         }
-                    }
-                    if (dividend[limit] > 5000 && dividend[limit - 1] > 30)
-                    {
-                        limit = limit - 1;
+                        limit = 0;
+                        sub = 0;
+                        while (sub < dividend.Count)
+                        {
+                            if (dividend[sub] <= 500)
+                            {
+                                limit = sub;
+                            }
+                            sub++;
+                        }
                     }
                 }
             }
             nogroup = dividend[limit];
-            amtofgrp = asciilength / nogroup;           
+            amtofgrp = asciilength / nogroup;
         }
-        byte[] outputbyte;
+
+        private byte[] outputbyte;
+
         private void Encrypt()
         {
-
             var check = new List<Int32>();
             var bytelist = new List<Byte>();
             int privlenght = privateKey.Length;
@@ -524,13 +494,13 @@ namespace WindowsFormsApplication1
             if (inputpath != null)
             {
                 Transition();
-                int zz = 0;                
+                int zz = 0;
                 while (zz < bytefile.Length)
                 {
                     tempspace.Add(0);
                     zz = zz + 1;
                 }
-            }            
+            }
             while ((((nogroup % 2) == 0) && i <= (nogroup / 2)) ||
                    (((nogroup % 2) == 1) && i <= (nogroup / 2) - 1))
             {
@@ -628,10 +598,10 @@ namespace WindowsFormsApplication1
                 }
                 if (inputpath != null)
                 {
-                    if (bytefile.Length % nogroup != 0)
+                    if (bytefile.Length % nogroup != 0 && i == 0)
                     {
-                        int isolate = Convert.ToInt32(((bytefile.Length).ToString()).Substring(bytefile.Length - 1, 1));
-                        while (isolate >= 0)
+                        int isolate = Convert.ToInt32(((bytefile.Length).ToString()).Substring(((bytefile.Length).ToString()).Length - 1, 1));
+                        while (isolate > 0)
                         {
                             tempspace[bytefile.Length - isolate] = bytefile[bytefile.Length - isolate];
                             isolate = isolate - 1;
@@ -680,13 +650,14 @@ namespace WindowsFormsApplication1
                         {
                             while (z < amtofgrp)
                             {
-                                tempspace[i+z] = bytefile[ctlpublic+z];
-                                tempspace[ctlpublic+z] = bytefile[i+z];
+                                tempspace[i + z] = bytefile[ctlpublic + z];
+                                tempspace[ctlpublic + z] = bytefile[i + z];
                                 z++;
                             }
                             check.Add(i);
                             check.Add(ctlpublic);
                             z++;
+                            i = i + 1;
                         }
                         if (check.Count == (amtofgrp * (nogroup - 1)))
                         {
@@ -699,13 +670,13 @@ namespace WindowsFormsApplication1
                             while (z < amtofgrp)
                             {
                                 tempspace[thr + z] = bytefile[thr + z];
-                                
+
                                 z++;
                             }
                             check.Add(thr);
                             i = i + 1;
                         }
-                        if (check.Count == (amtofgrp *(nogroup - 2)))
+                        if (check.Count == (amtofgrp * (nogroup - 2)))
                         {
                             int rem1 = 0;
                             int rem2 = 0;
@@ -724,7 +695,6 @@ namespace WindowsFormsApplication1
                                 }
                                 while (z < amtofgrp)
                                 {
-                                    
                                     tempspace[rem1 + z] = bytefile[rem2 + z];
                                     tempspace[rem2 + z] = bytefile[rem1 + z];
                                     z++;
@@ -746,75 +716,75 @@ namespace WindowsFormsApplication1
                     }
                 }
             }
-                if (inputpath == null)
+            if (inputpath == null)
+            {
+                string TpublicKey = publicKey;
+                if ((publicKey.Length % 2) == 1)
                 {
-                    string TpublicKey = publicKey;
-                    if ((publicKey.Length % 2) == 1)
+                    while (publicKey.Length != 1)
                     {
-                        while (publicKey.Length != 1)
+                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 97)
                         {
-                            if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 97)
-                            {
-                                outputkey = outputkey + "range0";
-                                publicKey = publicKey.Remove(0, 2);
-                            }
-                            if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 98)
-                            {
-                                outputkey = outputkey + "range1";
-                                publicKey = publicKey.Remove(0, 2);
-                            }
-                            if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 99)
-                            {
-                                outputkey = outputkey + "range2";
-                                publicKey = publicKey.Remove(0, 2);
-                            }
-                            if (publicKey.Length >= 1 && Convert.ToInt32(publicKey.Substring(0, 2)) <= 96)
-                            {
-                                outputkey = outputkey + alphabet[Convert.ToInt32(publicKey.Substring(0, 2))];
-                                publicKey = publicKey.Remove(0, 2);
-                            }
+                            outputkey = outputkey + "range0";
+                            publicKey = publicKey.Remove(0, 2);
                         }
-                        if (publicKey.Length == 1)
+                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 98)
                         {
-                            outputkey = outputkey + "single" + publicKey.Substring(0, 1);
-                            publicKey = publicKey.Remove(0, 1);
+                            outputkey = outputkey + "range1";
+                            publicKey = publicKey.Remove(0, 2);
+                        }
+                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 99)
+                        {
+                            outputkey = outputkey + "range2";
+                            publicKey = publicKey.Remove(0, 2);
+                        }
+                        if (publicKey.Length >= 1 && Convert.ToInt32(publicKey.Substring(0, 2)) <= 96)
+                        {
+                            outputkey = outputkey + alphabet[Convert.ToInt32(publicKey.Substring(0, 2))];
+                            publicKey = publicKey.Remove(0, 2);
                         }
                     }
-                    if (((publicKey.Length % 2) == 0))
+                    if (publicKey.Length == 1)
                     {
-                        while (publicKey.Length != 0)
-                        {
-
-                            if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 97)
-                            {
-                                outputkey = outputkey + "range0";
-                                publicKey = publicKey.Remove(0, 2);
-                            }
-                            if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 98)
-                            {
-                                outputkey = outputkey + "range1";
-                                publicKey = publicKey.Remove(0, 2);
-                            }
-                            if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 99)
-                            {
-                                outputkey = outputkey + "range2";
-                                publicKey = publicKey.Remove(0, 2);
-                            }
-                            if (publicKey.Length >= 1 && Convert.ToInt32(publicKey.Substring(0, 2)) <= 96)
-                            {
-                                outputkey = outputkey + alphabet[Convert.ToInt32(publicKey.Substring(0, 2))];
-                                publicKey = publicKey.Remove(0, 2);
-                            }
-                        }
+                        outputkey = outputkey + "single" + publicKey.Substring(0, 1);
+                        publicKey = publicKey.Remove(0, 1);
                     }
-                    MessageBox.Show(TpublicKey);
                 }
-                if (inputpath != null)
+                if (((publicKey.Length % 2) == 0))
                 {
-                    outputbyte = tempspace.ToArray();
-                    File.WriteAllBytes("C:\\Users\\zodiac3011\\Desktop\\test.exe", outputbyte);
-                }            
+                    while (publicKey.Length != 0)
+                    {
+                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 97)
+                        {
+                            outputkey = outputkey + "range0";
+                            publicKey = publicKey.Remove(0, 2);
+                        }
+                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 98)
+                        {
+                            outputkey = outputkey + "range1";
+                            publicKey = publicKey.Remove(0, 2);
+                        }
+                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 99)
+                        {
+                            outputkey = outputkey + "range2";
+                            publicKey = publicKey.Remove(0, 2);
+                        }
+                        if (publicKey.Length >= 1 && Convert.ToInt32(publicKey.Substring(0, 2)) <= 96)
+                        {
+                            outputkey = outputkey + alphabet[Convert.ToInt32(publicKey.Substring(0, 2))];
+                            publicKey = publicKey.Remove(0, 2);
+                        }
+                    }
+                }
+                MessageBox.Show(TpublicKey);
+            }
+            if (inputpath != null)
+            {
+                outputbyte = tempspace.ToArray();
+                File.WriteAllBytes("C:\\Users\\zodiac3011\\Desktop\\test.exe", outputbyte);
+            }
         }
+
         private void DEControlHash()
         {
             string subpriv = privateKey;
@@ -823,7 +793,7 @@ namespace WindowsFormsApplication1
             {
                 ctlhash = ctlhash + Convert.ToInt32(subpriv.Substring(0, 1));
                 subpriv = subpriv.Remove(0, 1);
-                if (subpriv.Length == 0 && ctlhash > (hash.ToString()).Length || messageascii.Length / 2 < ctlhash)
+                if (subpriv.Length == 0 && ctlhash > (hash.ToString()).Length || tempkey.Length / 2 < ctlhash)
                 {
                     dk = dk + 1;
                     subpriv = (Math.Sqrt(Convert.ToInt32(ctlhash))).ToString();
@@ -836,24 +806,81 @@ namespace WindowsFormsApplication1
             }
             ctlhash = Convert.ToInt32(Math.Sqrt(ctlhash));
         }
+
+        private string[] DEmodified;
+        private string tempkey;
+
+        private void DEGroup()
+        {
+            int number = 0;
+            var tempmodified = new List<string>();
+            string subascii = tempkey;
+            int asciilength = 0;
+            if (tempkey.Length % 10 == 0)
+            {
+                var dividend = new List<Int32>();
+                int j = 1;
+                while (j <= tempkey.Length)
+                {
+                    if (tempkey.Length % j == 0)
+                    {
+                        dividend.Add(j);
+                    }
+                    j = j + 1;
+                }
+                nogroup = dividend[(dividend.Count / 2) - 1];
+                number = tempkey.Length / nogroup;
+            }
+            if (tempkey.Length % 10 != 0)
+            {
+                var dividend = new List<Int32>();
+                asciilength = Convert.ToInt32(((tempkey.Length).ToString()).Substring(0, ((tempkey.Length).ToString()).Length - 1));
+                asciilength = asciilength * 10;
+                int j = 1;
+                while (j <= asciilength)
+                {
+                    if (asciilength % j == 0)
+                    {
+                        dividend.Add(j);
+                    }
+                    j = j + 1;
+                }
+                nogroup = dividend[(dividend.Count / 2) - 1];
+                number = asciilength / nogroup;
+            }
+            int a = 1;
+            while (a <= nogroup)
+            {
+                tempmodified.Add(subascii.Substring(0, number));
+                subascii = subascii.Remove(0, number);
+                a++;
+            }
+            if (subascii.Length != 0)
+            {
+                nogroup = nogroup + 1;
+                tempmodified.Add(subascii);
+            }
+            DEmodified = tempmodified.ToArray();
+        }
+
         private void Decrypt()
         {
-            string tempkey = "";
+            tempkey = "";
             var check = new List<Int32>();
             var bytelist = new List<Byte>();
             int privlenght = privateKey.Length;
             //Rào điều kiện chạy dãy hash
-            if ((privlenght%2) == 0) //trường hợp privatekey chẵn
+            if ((privlenght % 2) == 0) //trường hợp privatekey chẵn
             {
-                hash = BigInteger.Pow(BigInteger.Parse(privateKey.Substring(0, privateKey.Length/2)),
-                    Convert.ToInt32(privateKey.Substring(privateKey.Length/2, privateKey.Length/2)));
+                hash = BigInteger.Pow(BigInteger.Parse(privateKey.Substring(0, privateKey.Length / 2)),
+                    Convert.ToInt32(privateKey.Substring(privateKey.Length / 2, privateKey.Length / 2)));
             }
-            if ((privlenght%2) == 1) //trường hợp privatekey lẻ
+            if ((privlenght % 2) == 1) //trường hợp privatekey lẻ
             {
-                hash = BigInteger.Pow(BigInteger.Parse(privateKey.Substring(0, (privateKey.Length - 1)/2)),
-                    Convert.ToInt32(privateKey.Substring((privateKey.Length - 1)/2, (privateKey.Length - 1)/2 + 1)));
+                hash = BigInteger.Pow(BigInteger.Parse(privateKey.Substring(0, (privateKey.Length - 1) / 2)),
+                    Convert.ToInt32(privateKey.Substring((privateKey.Length - 1) / 2, (privateKey.Length - 1) / 2 + 1)));
             }
-            
+
             DEmessage = "";
             int idx = 0;
             string index = "";
@@ -880,22 +907,22 @@ namespace WindowsFormsApplication1
                     }
                     publicKey = publicKey.Remove(0, 6);
                 }
-                    if (publicKey.Length >= 7 && (publicKey.Substring(0, 7) == "single0" || publicKey.Substring(0, 7) == "single1" ||
-                     publicKey.Substring(0, 7) == "single2" || publicKey.Substring(0, 7) == "single3" ||
-                     publicKey.Substring(0, 7) == "single4" || publicKey.Substring(0, 7) == "single5" ||
-                     publicKey.Substring(0, 7) == "single6" || publicKey.Substring(0, 7) == "single7" ||
-                     publicKey.Substring(0, 7) == "single8" || publicKey.Substring(0, 7) == "single9") &&
-                    (publicKey.Substring(0, 6) != "range0" || publicKey.Substring(0, 6) != "range1" || publicKey.Substring(0, 6) != "range2"))
+                if (publicKey.Length >= 7 && (publicKey.Substring(0, 7) == "single0" || publicKey.Substring(0, 7) == "single1" ||
+                 publicKey.Substring(0, 7) == "single2" || publicKey.Substring(0, 7) == "single3" ||
+                 publicKey.Substring(0, 7) == "single4" || publicKey.Substring(0, 7) == "single5" ||
+                 publicKey.Substring(0, 7) == "single6" || publicKey.Substring(0, 7) == "single7" ||
+                 publicKey.Substring(0, 7) == "single8" || publicKey.Substring(0, 7) == "single9") &&
+                (publicKey.Substring(0, 6) != "range0" || publicKey.Substring(0, 6) != "range1" || publicKey.Substring(0, 6) != "range2"))
                 {
                     tempkey = tempkey + publicKey.Substring(6, 1);
                     publicKey = publicKey.Remove(0, 7);
                 }
-                    if (publicKey.Length >= 1 && (publicKey.Substring(0, 7) != "single0" || publicKey.Substring(0, 7) != "single1" ||
-                     publicKey.Substring(0, 7) != "single2" || publicKey.Substring(0, 7) != "single3" ||
-                     publicKey.Substring(0, 7) != "single4" || publicKey.Substring(0, 7) != "single5" ||
-                     publicKey.Substring(0, 7) != "single6" || publicKey.Substring(0, 7) != "single7" ||
-                     publicKey.Substring(0, 7) != "single8" || publicKey.Substring(0, 7) != "single9") &&
-                    (publicKey.Substring(0, 6) != "range0" || publicKey.Substring(0, 6) != "range1" || publicKey.Substring(0, 6) == "range2"))
+                if (publicKey.Length >= 1 && (publicKey.Substring(0, 7) != "single0" || publicKey.Substring(0, 7) != "single1" ||
+                 publicKey.Substring(0, 7) != "single2" || publicKey.Substring(0, 7) != "single3" ||
+                 publicKey.Substring(0, 7) != "single4" || publicKey.Substring(0, 7) != "single5" ||
+                 publicKey.Substring(0, 7) != "single6" || publicKey.Substring(0, 7) != "single7" ||
+                 publicKey.Substring(0, 7) != "single8" || publicKey.Substring(0, 7) != "single9") &&
+                (publicKey.Substring(0, 6) != "range0" || publicKey.Substring(0, 6) != "range1" || publicKey.Substring(0, 6) == "range2"))
                 {
                     idx = 0;
                     while (alphabet[idx].ToString() != publicKey.Substring(0, 1) && idx < alphabet.Length && publicKey.Length > 0)
@@ -915,108 +942,97 @@ namespace WindowsFormsApplication1
                 }
             }
             MessageBox.Show(tempkey);
+            DEGroup();
             DEControlHash();
-            if (DEmessage.Length != tempkey.Length)
+            var temporiginal = new List<string>();
+            temporiginal.Add("0");
+            while (temporiginal.Count != DEmodified.Length)
             {
-                DEmessage = string.Concat(Enumerable.Repeat("0", tempkey.Length));
+                temporiginal.Add("0");
             }
             int i = 0;
-            string submess = message; //string phụ chạy điều kiện lặp while
             string subhash = hash.ToString(); //string phụ chạy lặp while
-            while ((((tempkey.Length%2) == 0) && i <= (tempkey.Length/2)) ||
-                   (((tempkey.Length%2) == 1) && i <= (tempkey.Length/2) - 1))
+            while ((((nogroup % 2) == 0) && i <= (nogroup / 2)) ||
+                   (((nogroup % 2) == 1) && i <= (nogroup / 2) - 1))
             {
-                int a = 0;
-                ctlpublic = 0;
-                while (subhash.Length < ctlhash) //Trường hợp mà hết hash phải thêm hash vào
+                while (subhash.Length <= ctlhash) //Trường hợp mà hết hash phải thêm hash vào
                 {
                     subhash = subhash + hash;
                 }
                 if (subhash.Length > ctlhash) //Đủ hash thì quẫy thôi :v
                 {
-
-                    orgpublic = subhash.Substring(0, (ctlhash.ToString()).Length); //dãy hash con
-                    while (a <= ctlhash)
+                    orgpublic = subhash.Substring(0, ctlhash); //dãy hash con
+                    int s = 0;
+                    while (s <= Math.Sqrt(Convert.ToDouble(orgpublic)))
                     {
-                        if (ctlpublic <= tempkey.Length)
-                        {
-                            ctlpublic = ctlpublic + 1;
-                        }
-                        if (ctlpublic > tempkey.Length)
+                        ctlpublic = ctlpublic + 1;
+                        s = s + 1;
+                        if (ctlpublic > nogroup)
                         {
                             ctlpublic = 0;
                         }
-                        a = a + 1;
                     }
-                }
-                bool exist1 = check.Exists(element => element == i);
-                bool exist2 = check.Exists(element => element == ctlpublic);
-                if (ctlpublic < tempkey.Length && exist1 == false && exist2 == false && i != ctlpublic)
-                {
-                    MessageBox.Show(i + "và " + ctlpublic);
-                    char replace1 = (tempkey[i]);
-                    char replace2 = (tempkey[ctlpublic]);
-                    StringBuilder change = new StringBuilder(DEmessage);
-                    change[ctlpublic] = replace1;
-                    change[i] = replace2;
-                    DEmessage = change.ToString();
-                    check.Add(i);
-                    check.Add(ctlpublic);
-                    i = i + 1;
-                }
-                if (check.Count == (tempkey.Length - 1))
-                {
-                    int thr = 0;
-                    while ((check.Exists(element => element == thr)) == true)
+                    bool exist1 = check.Exists(element => element == i);
+                    bool exist2 = check.Exists(element => element == ctlpublic);
+                    if (ctlpublic < nogroup && exist1 == false && exist2 == false && i != ctlpublic)
                     {
-                        thr = thr + 1;
-                    }
-                    char replace3 = (tempkey[thr]);
-                    StringBuilder change1 = new StringBuilder(DEmessage);
-                    change1[thr] = replace3;
-                    DEmessage = change1.ToString();
-                    i = i + 1;
-                    check.Add(thr);
-                }
-                if (check.Count == (tempkey.Length - 2))
-                {
-                    int rem1 = 0;
-                    int rem2 = 0;
-                    if ((check.Exists(element => element == rem1)) == true ||
-                        (check.Exists(element => element == rem2)) == true)
-                    {
-                        while ((check.Exists(element => element == rem1)) == true)
-                        {
-                            rem1 = rem1 + 1;
-                        }
-                        check.Add(rem1);
-                        while ((check.Exists(element => element == rem2)) == true)
-                        {
-                            rem2 = rem2 + 1;
-                        }
-                        check.Add(rem1);
-                        char replace6 = tempkey[rem1];
-                        char replace5 = tempkey[rem2];
-                        StringBuilder change2 = new StringBuilder(DEmessage);
-                        change2[rem1] = replace5;
-                        change2[rem2] = replace6;
-                        DEmessage = change2.ToString();
+                        temporiginal[i] = DEmodified[ctlpublic];
+                        temporiginal[ctlpublic] = DEmodified[i];
+                        check.Add(i);
+                        check.Add(ctlpublic);
                         i = i + 1;
                     }
+                    if (check.Count == (nogroup - 1))
+                    {
+                        int thr = 0;
+                        while ((check.Exists(element => element == thr)) == true)
+                        {
+                            thr = thr + 1;
+                        }
+                        temporiginal[thr] = DEmodified[thr];
+                        i = i + 1;
+                        check.Add(thr);
+                    }
+                    if (check.Count == (nogroup - 2))
+                    {
+                        int rem1 = 0;
+                        int rem2 = 0;
+                        if ((check.Exists(element => element == rem1)) == true ||
+                            (check.Exists(element => element == rem2)) == true)
+                        {
+                            while ((check.Exists(element => element == rem1)) == true)
+                            {
+                                rem1 = rem1 + 1;
+                            }
+                            check.Add(rem1);
+                            while ((check.Exists(element => element == rem2)) == true)
+                            {
+                                rem2 = rem2 + 1;
+                            }
+                            check.Add(rem2);
+                            temporiginal[rem1] = DEmodified[rem2];
+                            temporiginal[rem2] = DEmodified[rem1];
+                            i = i + 1;
+                        }
+                    }
+                    if (check.Exists(element => element == i) == true)
+                    {
+                        i = i + 1;
+                    }
+                    while (subhash.Length <= ctlhash) //Trường hợp mà hết hash phải thêm hash vào
+                    {
+                        subhash = subhash + hash;
+                    }
+                    subhash = subhash.Remove(0, ctlhash);
                 }
-                if (check.Exists(element => element == i) == true)
-                {
-                    i = i + 1;
-                }
-                while (subhash.Length < ctlhash) //Trường hợp mà hết hash phải thêm hash vào
-                {
-                    subhash = subhash + hash;
-                }
-                subhash = subhash.Remove(0, ctlhash);
+            }
+            int l = 0;
+            while (l < nogroup)
+            {
+                DEmessage = DEmessage + temporiginal[l];
+                l++;
             }
             MessageBox.Show(DEmessage);
-
         }
-
-        }
+    }
 }
