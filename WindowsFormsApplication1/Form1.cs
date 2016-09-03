@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
@@ -120,7 +121,53 @@ namespace WindowsFormsApplication1
         {
             publicKey = textBox15.Text;
         }
-
+        private void PrivatekeyProcess()
+        {
+            string subprivatekey = "";
+            if (Regex.IsMatch(privateKey, "[a-zA-Z]") == true)
+            {
+                int a = 0;                
+                int index = 0;
+                while (a < privateKey.Length)
+                {
+                    if (Regex.IsMatch(privateKey[a].ToString(), "[a-zA-Z]") == false)
+                    {
+                        index = 0;
+                        subprivatekey = subprivatekey + privateKey[a].ToString();
+                        a++;
+                    }
+                    index = 0;
+                    if (a < privateKey.Length)
+                    {
+                        if (Regex.IsMatch(privateKey[a].ToString(), "[a-zA-Z]"))
+                        {
+                            while (alphabet[index] != privateKey[a])
+                            {
+                                index++;
+                            }
+                            subprivatekey = subprivatekey + index;
+                            a++;
+                        }
+                    }
+                }
+                privateKey = subprivatekey;
+                MessageBox.Show(privateKey);
+            }
+            BigInteger test = BigInteger.Parse(privateKey);
+            while (test > Int32.MaxValue)
+            {
+                if (privateKey.Length % 2 == 0)
+                {
+                    privateKey = (BigInteger.Parse(((test.ToString()).Substring(0, privateKey.Length / 2))) + BigInteger.Parse(((test.ToString()).Substring(privateKey.Length / 2, privateKey.Length / 2)))).ToString();
+                }
+                if (privateKey.Length % 2 == 1)
+                {
+                    privateKey = (BigInteger.Parse(((test.ToString()).Substring(0, (privateKey.Length-1) / 2))) + BigInteger.Parse(((test.ToString()).Substring((privateKey.Length - 1) / 2, ((privateKey.Length - 1) / 2) + 1)))).ToString();
+                }
+                test = BigInteger.Parse(privateKey);
+            }
+            MessageBox.Show(privateKey);
+        }
         private void button3_Click(object sender, EventArgs e)
         {
             publicKey = null;
@@ -137,6 +184,7 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Please enter all the required details");
                 return;
             }
+           PrivatekeyProcess();
             Encrypt();
             textBox12.Text = outputkey;
         }
@@ -271,6 +319,7 @@ namespace WindowsFormsApplication1
                 return;
             }
             bytefile = System.IO.File.ReadAllBytes(inputpath);
+            PrivatekeyProcess();
             Encrypt();
         }
 
@@ -289,7 +338,7 @@ namespace WindowsFormsApplication1
         private void Alphabet()
         {
             allist =
-            "0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_-+=,./;'[]><|{}?:`~\n\"\\\t\v";
+            "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_-+=,./;'[]><|{}?:`~\n\"\\\t\v";
             var subal = new List<char>();
             while (allist.Length != 0)
             {
@@ -401,11 +450,13 @@ namespace WindowsFormsApplication1
             }
             while (sub < dividend.Count)
             {
-                sub++;
+
                 if (dividend[sub] <= 500)
                 {
                     limit = sub;
                 }
+                sub++;
+            }
                 if (dividend[dividend.Count - 1] < 30 || dividend[2] > 500 || dividend[2] > 1000)
                 {
                     if (dividend[2] > 500)
@@ -443,7 +494,6 @@ namespace WindowsFormsApplication1
                             }
                             sub++;
                         }
-                    }
                 }
             }
             nogroup = dividend[limit];
@@ -723,22 +773,17 @@ namespace WindowsFormsApplication1
                 {
                     while (publicKey.Length != 1)
                     {
-                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 97)
+                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 98)
                         {
                             outputkey = outputkey + "range0";
                             publicKey = publicKey.Remove(0, 2);
                         }
-                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 98)
+                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 99)
                         {
                             outputkey = outputkey + "range1";
                             publicKey = publicKey.Remove(0, 2);
                         }
-                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 99)
-                        {
-                            outputkey = outputkey + "range2";
-                            publicKey = publicKey.Remove(0, 2);
-                        }
-                        if (publicKey.Length >= 1 && Convert.ToInt32(publicKey.Substring(0, 2)) <= 96)
+                        if (publicKey.Length >= 1 && Convert.ToInt32(publicKey.Substring(0, 2)) <= 97)
                         {
                             outputkey = outputkey + alphabet[Convert.ToInt32(publicKey.Substring(0, 2))];
                             publicKey = publicKey.Remove(0, 2);
@@ -754,22 +799,17 @@ namespace WindowsFormsApplication1
                 {
                     while (publicKey.Length != 0)
                     {
-                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 97)
+                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 98)
                         {
                             outputkey = outputkey + "range0";
                             publicKey = publicKey.Remove(0, 2);
                         }
-                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 98)
+                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 99)
                         {
                             outputkey = outputkey + "range1";
                             publicKey = publicKey.Remove(0, 2);
                         }
-                        if (publicKey.Length >= 2 && Convert.ToInt32(publicKey.Substring(0, 2)) == 99)
-                        {
-                            outputkey = outputkey + "range2";
-                            publicKey = publicKey.Remove(0, 2);
-                        }
-                        if (publicKey.Length >= 1 && Convert.ToInt32(publicKey.Substring(0, 2)) <= 96)
+                        if (publicKey.Length >= 1 && Convert.ToInt32(publicKey.Substring(0, 2)) <= 97)
                         {
                             outputkey = outputkey + alphabet[Convert.ToInt32(publicKey.Substring(0, 2))];
                             publicKey = publicKey.Remove(0, 2);
@@ -865,6 +905,7 @@ namespace WindowsFormsApplication1
 
         private void Decrypt()
         {
+            PrivatekeyProcess();
             tempkey = "";
             var check = new List<Int32>();
             var bytelist = new List<Byte>();
@@ -886,24 +927,15 @@ namespace WindowsFormsApplication1
             string index = "";
             while (publicKey.Length != 0)
             {
-                if (publicKey.Length >= 6 && (publicKey.Substring(0, 7) != "single0" || publicKey.Substring(0, 7) != "single1" ||
-                     publicKey.Substring(0, 7) != "single2" || publicKey.Substring(0, 7) != "single3" ||
-                     publicKey.Substring(0, 7) != "single4" || publicKey.Substring(0, 7) != "single5" ||
-                     publicKey.Substring(0, 7) != "single6" || publicKey.Substring(0, 7) != "single7" ||
-                     publicKey.Substring(0, 7) != "single8" || publicKey.Substring(0, 7) != "single9") &&
-                    (publicKey.Substring(0, 6) == "range0" || publicKey.Substring(0, 6) == "range1" || publicKey.Substring(0, 6) == "range2"))
+                if (publicKey.Length >= 6 && (publicKey.Substring(0, 6) == "range0" || publicKey.Substring(0, 6) == "range1"))
                 {
-                    if (publicKey.Substring(0, 6) == "range2")
+                    if (publicKey.Substring(0, 6) == "range1")
                     {
                         tempkey = tempkey + "99";
                     }
-                    if (publicKey.Substring(0, 6) == "range1")
-                    {
-                        tempkey = tempkey + "98";
-                    }
                     if (publicKey.Substring(0, 6) == "range0")
                     {
-                        tempkey = tempkey + "97";
+                        tempkey = tempkey + "98";
                     }
                     publicKey = publicKey.Remove(0, 6);
                 }
@@ -911,8 +943,7 @@ namespace WindowsFormsApplication1
                  publicKey.Substring(0, 7) == "single2" || publicKey.Substring(0, 7) == "single3" ||
                  publicKey.Substring(0, 7) == "single4" || publicKey.Substring(0, 7) == "single5" ||
                  publicKey.Substring(0, 7) == "single6" || publicKey.Substring(0, 7) == "single7" ||
-                 publicKey.Substring(0, 7) == "single8" || publicKey.Substring(0, 7) == "single9") &&
-                (publicKey.Substring(0, 6) != "range0" || publicKey.Substring(0, 6) != "range1" || publicKey.Substring(0, 6) != "range2"))
+                 publicKey.Substring(0, 7) == "single8" || publicKey.Substring(0, 7) == "single9"))
                 {
                     tempkey = tempkey + publicKey.Substring(6, 1);
                     publicKey = publicKey.Remove(0, 7);
@@ -922,7 +953,7 @@ namespace WindowsFormsApplication1
                  publicKey.Substring(0, 7) != "single4" || publicKey.Substring(0, 7) != "single5" ||
                  publicKey.Substring(0, 7) != "single6" || publicKey.Substring(0, 7) != "single7" ||
                  publicKey.Substring(0, 7) != "single8" || publicKey.Substring(0, 7) != "single9") &&
-                (publicKey.Substring(0, 6) != "range0" || publicKey.Substring(0, 6) != "range1" || publicKey.Substring(0, 6) == "range2"))
+                (publicKey.Substring(0, 6) != "range0" || publicKey.Substring(0, 6) != "range1"))
                 {
                     idx = 0;
                     while (alphabet[idx].ToString() != publicKey.Substring(0, 1) && idx < alphabet.Length && publicKey.Length > 0)
@@ -1032,6 +1063,16 @@ namespace WindowsFormsApplication1
                 DEmessage = DEmessage + temporiginal[l];
                 l++;
             }
+            MessageBox.Show(DEmessage);
+            l = 0;
+            var tempoutputbyte = new List<Byte>();
+            while (l < temporiginal.Count)
+            {
+                tempoutputbyte.Add(Convert.ToByte(temporiginal[l]));
+                l++;
+            }
+            byte[] outputmessage = tempoutputbyte.ToArray();
+            DEmessage = Encoding.ASCII.GetString(outputmessage);
             MessageBox.Show(DEmessage);
         }
     }
