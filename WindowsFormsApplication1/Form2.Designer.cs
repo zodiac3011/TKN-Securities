@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
@@ -39,10 +38,11 @@
             // 
             // Form2
             // 
-            resources.ApplyResources(this, "$this");
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.BackgroundImage = global::TKNSecurities.Properties.Resources.Screenshot__2_;
+            this.ClientSize = new System.Drawing.Size(716, 448);
             this.ControlBox = false;
             this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.DoubleBuffered = true;
@@ -52,6 +52,7 @@
             this.Name = "Form2";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
             this.UseWaitCursor = true;
             this.Load += new System.EventHandler(this.Form2_Load);
