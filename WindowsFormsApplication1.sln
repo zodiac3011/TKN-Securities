@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{91DDF1AE-4009-4A04-880C-44EBFC5107B3}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TKN Securities", "Installer\Installer.vdproj", "{F33D4351-51DD-4F39-A8E4-07F4443C42D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,19 @@ Global
 		{91DDF1AE-4009-4A04-880C-44EBFC5107B3}.x86x64|x64.Build.0 = Debug|x64
 		{91DDF1AE-4009-4A04-880C-44EBFC5107B3}.x86x64|x86.ActiveCfg = x86x64|x86
 		{91DDF1AE-4009-4A04-880C-44EBFC5107B3}.x86x64|x86.Build.0 = x86x64|x86
+		{F33D4351-51DD-4F39-A8E4-07F4443C42D5}.Debug|Any CPU.ActiveCfg = Debug
+		{F33D4351-51DD-4F39-A8E4-07F4443C42D5}.Debug|x64.ActiveCfg = Debug
+		{F33D4351-51DD-4F39-A8E4-07F4443C42D5}.Debug|x86.ActiveCfg = Debug
+		{F33D4351-51DD-4F39-A8E4-07F4443C42D5}.Release|Any CPU.ActiveCfg = Release
+		{F33D4351-51DD-4F39-A8E4-07F4443C42D5}.Release|Any CPU.Build.0 = Release
+		{F33D4351-51DD-4F39-A8E4-07F4443C42D5}.Release|x64.ActiveCfg = Release
+		{F33D4351-51DD-4F39-A8E4-07F4443C42D5}.Release|x86.ActiveCfg = Release
+		{F33D4351-51DD-4F39-A8E4-07F4443C42D5}.x86|Any CPU.ActiveCfg = Release
+		{F33D4351-51DD-4F39-A8E4-07F4443C42D5}.x86|x64.ActiveCfg = Release
+		{F33D4351-51DD-4F39-A8E4-07F4443C42D5}.x86|x86.ActiveCfg = Release
+		{F33D4351-51DD-4F39-A8E4-07F4443C42D5}.x86x64|Any CPU.ActiveCfg = Release
+		{F33D4351-51DD-4F39-A8E4-07F4443C42D5}.x86x64|x64.ActiveCfg = Release
+		{F33D4351-51DD-4F39-A8E4-07F4443C42D5}.x86x64|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

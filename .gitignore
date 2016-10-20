@@ -250,3 +250,11 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+/Setup1
+/WindowsXP-KB942288-v3-x86.exe
+/WindowsServer2003-KB958655-v2-x86-ENU.exe
+/WindowsServer2003-KB942288-v4-x86.exe
+/WindowsServer2003-KB942288-v4-x64.exe
+/Windows6.0-KB958655-v2-x64.msu
+/Windows6.0-KB942288-v2-x86.msu
+/Windows6.0-KB942288-v2-x64.msu

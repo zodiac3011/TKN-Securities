@@ -478,6 +478,7 @@
             this.tabPage9.TabIndex = 1;
             this.tabPage9.Text = "FILE";
             this.tabPage9.UseVisualStyleBackColor = true;
+            this.tabPage9.Click += new System.EventHandler(this.tabPage9_Click);
             // 
             // textBox20
             // 
@@ -539,6 +540,7 @@
             this.textBox17.Name = "textBox17";
             this.textBox17.Size = new System.Drawing.Size(606, 20);
             this.textBox17.TabIndex = 2;
+            this.textBox17.UseSystemPasswordChar = true;
             this.textBox17.TextChanged += new System.EventHandler(this.textBox17_TextChanged);
             // 
             // button7
@@ -742,6 +744,7 @@
             this.textBox23.Name = "textBox23";
             this.textBox23.Size = new System.Drawing.Size(606, 20);
             this.textBox23.TabIndex = 11;
+            this.textBox23.UseSystemPasswordChar = true;
             this.textBox23.TextChanged += new System.EventHandler(this.textBox23_TextChanged);
             // 
             // button10
