@@ -153,7 +153,7 @@ namespace WindowsFormsApplication1
                 return;
             }
             Decrypt();
-            textBox14.Text = outputmessage;
+            textBox14.Text = originalmessage;
         }
 
         private void button6_Click(object sender, EventArgs e)
