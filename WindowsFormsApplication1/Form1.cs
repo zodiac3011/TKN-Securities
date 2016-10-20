@@ -378,6 +378,7 @@ namespace WindowsFormsApplication1
                     publicKey = publicKey.Remove(0, 1);
                 }
             }
+            //
             DEGroup();
             DEControlHash();
             var temporiginal = new List<string>();
